@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    name: Safe checks
+  ci:
+    name: CI
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
@@ -24,15 +24,3 @@ jobs:
           persist-credentials: false
       - name: Validate theme JSON
         run: python3 -m json.tool Derpwig.json > /dev/null
-
-  ci:
-    name: CI
-    if: ${{ always() }}
-    needs: checks
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    steps:
-      - name: Require all checks
-        env:
-          CHECKS_RESULT: ${{ needs.checks.result }}
-        run: test "$CHECKS_RESULT" = success

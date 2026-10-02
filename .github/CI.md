@@ -4,7 +4,7 @@
 
 Parses Derpwig.json using Python's JSON parser.
 
-The workflow runs on every pull request (including docs-only edits), on pushes to `main`, and on manual dispatch. The tiny checks are cheaper than a separate change-routing system. The final **CI** job always runs and fails unless Safe checks succeeded; failure, cancellation, or an unexpected skip cannot turn it green. No workflow-level path filter can leave the result pending.
+The workflow runs on every pull request (including docs-only edits), on pushes to `main`, and on manual dispatch. The tiny checks are cheaper than a separate change-routing system. The single, always-present **CI** job is the stable result; any failed step fails that check without paying for a second aggregate runner. No workflow-level path filter can leave the result pending.
 
 ## Run locally
 
